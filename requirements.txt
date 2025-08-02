@@ -1,0 +1,21 @@
+# GhostKitty Bitcrusher - Required Dependencies by CATHOUSEMP3
+# Install with: pip install -r requirements.txt
+
+# Core numerical computing
+numpy>=1.21.0
+scipy>=1.7.0
+
+# Audio processing and I/O
+soundfile>=0.10.0
+
+# GUI framework (modern dark theme)
+customtkinter>=5.0.0
+Pillow>=9.0.0
+
+# Real-time audio playback
+pygame>=2.1.0
+
+# Optional development dependencies (uncomment if needed)
+# matplotlib>=3.5.0  # For development visualization
+# pyaudio>=0.2.11   # Alternative audio backend
+# librosa>=0.9.0    # Advanced audio analysis

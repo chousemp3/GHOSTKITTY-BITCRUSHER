@@ -34,6 +34,8 @@ Created by **CATHOUSEMP3** - Transform your audio into glitchy, crushed, cyberpu
 
 ## 📸 Screenshots
 
+![GhostKitty Bitcrusher GUI](screenshots/ghostkitty-gui.png)
+
 The interface features a sleek cyberpunk design with:
 - 🖤 **Pure black background** for that hacker aesthetic
 - 🟢 **Neon green accents** for Matrix-style visuals

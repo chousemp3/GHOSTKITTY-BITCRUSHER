@@ -8,6 +8,8 @@
 
 Created by **CATHOUSEMP3**.
 
+![GhostKitty Bitcrusher](screenshots/ghostkitty-gui.png)
+
 ## Features
 
 ### Processing Controls

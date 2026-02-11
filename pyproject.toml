@@ -4,22 +4,19 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ghostkitty-bitcrusher"
-version = "1.0.0"
-description = "🐱💀 Epic cyberpunk audio bitcrusher with real-time preview"
-authors = [{name = "GhostKitty", email = "ghostkitty@example.com"}]
+version = "2.0.0"
+description = "Audio bitcrusher with real-time preview"
+authors = [{name = "CATHOUSEMP3"}]
 license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.8"
 dependencies = [
     "numpy>=1.21.0",
     "scipy>=1.7.0",
-    "pygame>=2.1.0",
+    "pygame-ce>=2.4.0",
     "customtkinter>=5.0.0",
     "Pillow>=9.0.0",
     "soundfile>=0.10.0",
-    "pyaudio>=0.2.11",
-    "matplotlib>=3.5.0",
-    "librosa>=0.9.0",
 ]
 
 [project.urls]

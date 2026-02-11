@@ -1,8 +1,7 @@
 """
-GhostKitty Bitcrusher - Epic Audio Destruction Tool 👻⚡
+GhostKitty Bitcrusher - Audio Bitcrushing Tool
 
 Main entry point for the application.
-Run this file to launch the cyberpunk GUI!
 """
 
 import sys
@@ -15,28 +14,21 @@ from ghostkitty_bitcrusher import GhostKittyGUI
 
 
 def main():
-    """
-    Launch the GhostKitty Bitcrusher application
-    """
-    print("🚀 Starting GhostKitty Bitcrusher...")
-    print("👻 Preparing for epic audio destruction! ⚡")
-    
+    """Launch the GhostKitty Bitcrusher application."""
+    print("Starting GhostKitty Bitcrusher...")
+
     try:
-        # Create and run the GUI
         app = GhostKittyGUI()
         app.run()
-        
+
     except KeyboardInterrupt:
-        print("\n👻 GhostKitty Bitcrusher shutting down...")
+        print("\nGhostKitty Bitcrusher shutting down.")
     except Exception as e:
-        print(f"❌ Error: {e}")
-        print("💀 Something went wrong! Check your audio setup.")
-        print("Make sure all dependencies are installed:")
-        print("pip install numpy scipy pygame customtkinter Pillow soundfile matplotlib")
+        print(f"Error: {e}")
+        print("Check your audio setup and ensure all dependencies are installed:")
+        print("  pip install -r requirements.txt")
         return 1
-    finally:
-        print("🔥 Thanks for using GhostKitty Bitcrusher! 🔥")
-    
+
     return 0
 
 

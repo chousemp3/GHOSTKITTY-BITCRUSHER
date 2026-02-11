@@ -1,19 +1,15 @@
 """
-Core Bitcrusher Audio Processing Engine
-Handles all the digital audio destruction magic ⚡
+Core Bitcrusher Audio Processing Engine.
 """
 
 import numpy as np
 from scipy import signal
-from typing import Tuple, Optional
+from typing import Optional
 import threading
-import time
 
 
 class BitCrusher:
-    """
-    Advanced bitcrusher with multiple algorithms for maximum audio destruction 🔥
-    """
+    """Advanced bitcrusher with multiple processing algorithms."""
     
     def __init__(self):
         self.sample_rate = 44100
@@ -24,14 +20,14 @@ class BitCrusher:
         
     def reduce_bit_depth(self, audio: np.ndarray, bit_depth: int) -> np.ndarray:
         """
-        Reduce bit depth for quantization distortion
-        
+        Reduce bit depth for quantization distortion.
+
         Args:
-            audio: Input audio array
-            bit_depth: Target bit depth (1-16)
-            
+            audio: Input audio array.
+            bit_depth: Target bit depth (1-16).
+
         Returns:
-            Bit-reduced audio
+            Bit-reduced audio.
         """
         if bit_depth >= 16:
             return audio
@@ -48,39 +44,41 @@ class BitCrusher:
     
     def downsample_and_upsample(self, audio: np.ndarray, factor: float) -> np.ndarray:
         """
-        Downsample then upsample for aliasing artifacts
-        
+        Downsample then upsample for aliasing artifacts.
+
         Args:
-            audio: Input audio array
-            factor: Downsampling factor (1.0 = no change, higher = more crushing)
-            
+            audio: Input audio array (mono or stereo).
+            factor: Downsampling factor (1.0 = no change, higher = more crushing).
+
         Returns:
-            Processed audio with aliasing artifacts
+            Processed audio with aliasing artifacts.
         """
         if factor <= 1.0:
             return audio
-            
-        # Calculate new sample rate
-        new_rate = int(self.sample_rate / factor)
-        
-        # Downsample using scipy
-        downsampled = signal.resample(audio, int(len(audio) / factor))
-        
-        # Upsample back to original rate
-        upsampled = signal.resample(downsampled, len(audio))
-        
+
+        original_len = len(audio)
+        target_len = max(1, int(original_len / factor))
+
+        # Handle mono vs stereo via axis parameter
+        if audio.ndim == 1:
+            downsampled = signal.resample(audio, target_len)
+            upsampled = signal.resample(downsampled, original_len)
+        else:
+            downsampled = signal.resample(audio, target_len, axis=0)
+            upsampled = signal.resample(downsampled, original_len, axis=0)
+
         return upsampled
     
     def apply_waveshaping(self, audio: np.ndarray, drive: float = 0.5) -> np.ndarray:
         """
-        Apply waveshaping distortion for extra character
-        
+        Apply waveshaping distortion.
+
         Args:
-            audio: Input audio array
-            drive: Distortion amount (0.0-1.0)
-            
+            audio: Input audio array.
+            drive: Distortion amount (0.0-1.0).
+
         Returns:
-            Waveshaped audio
+            Waveshaped audio.
         """
         if drive <= 0.0:
             return audio
@@ -91,14 +89,14 @@ class BitCrusher:
     
     def add_noise(self, audio: np.ndarray, amount: float = 0.1) -> np.ndarray:
         """
-        Add digital noise for extra grit
-        
+        Add digital noise.
+
         Args:
-            audio: Input audio array
-            amount: Noise amount (0.0-1.0)
-            
+            audio: Input audio array.
+            amount: Noise amount (0.0-1.0).
+
         Returns:
-            Audio with added noise
+            Audio with added noise.
         """
         if amount <= 0.0:
             return audio
@@ -106,26 +104,28 @@ class BitCrusher:
         noise = np.random.normal(0, amount * 0.1, audio.shape)
         return audio + noise
     
-    def process_audio(self, 
-                     audio: np.ndarray, 
-                     bit_depth: int = 8,
-                     downsample_factor: float = 1.0,
-                     mix: float = 1.0,
-                     waveshape: float = 0.0,
-                     noise: float = 0.0) -> np.ndarray:
+    def process_audio(
+        self,
+        audio: np.ndarray,
+        bit_depth: int = 8,
+        downsample_factor: float = 1.0,
+        mix: float = 1.0,
+        waveshape: float = 0.0,
+        noise: float = 0.0,
+    ) -> np.ndarray:
         """
-        Main bitcrushing function with all effects
-        
+        Main processing pipeline with all effects.
+
         Args:
-            audio: Input audio array
-            bit_depth: Target bit depth (1-16)
-            downsample_factor: Downsampling factor (1.0+)
-            mix: Wet/dry mix (0.0-1.0)
-            waveshape: Waveshaping amount (0.0-1.0)
-            noise: Noise amount (0.0-1.0)
-            
+            audio: Input audio array.
+            bit_depth: Target bit depth (1-16).
+            downsample_factor: Downsampling factor (1.0+).
+            mix: Wet/dry mix (0.0-1.0).
+            waveshape: Waveshaping amount (0.0-1.0).
+            noise: Noise amount (0.0-1.0).
+
         Returns:
-            Processed audio
+            Processed audio.
         """
         with self.processing_lock:
             self.is_processing = True
@@ -166,17 +166,16 @@ class BitCrusher:
             finally:
                 self.is_processing = False
     
-    def process_realtime_chunk(self, 
-                              chunk: np.ndarray,
-                              bit_depth: int = 8,
-                              downsample_factor: float = 1.0,
-                              mix: float = 1.0,
-                              waveshape: float = 0.0,
-                              noise: float = 0.0) -> np.ndarray:
-        """
-        Process a small chunk for real-time playback
-        Optimized for low latency and immediate parameter response
-        """
+    def process_realtime_chunk(
+        self,
+        chunk: np.ndarray,
+        bit_depth: int = 8,
+        downsample_factor: float = 1.0,
+        mix: float = 1.0,
+        waveshape: float = 0.0,
+        noise: float = 0.0,
+    ) -> np.ndarray:
+        """Process a small chunk for real-time playback (low latency)."""
         # Create a copy for processing
         processed = chunk.astype(np.float32, copy=True)
         original = chunk.astype(np.float32, copy=True)
@@ -200,10 +199,10 @@ class BitCrusher:
                     if i < len(processed):
                         processed[i:end_idx] = processed[i]
         
-        # Simple waveshaping
+        # Waveshaping — consistent with full processing pipeline
         if waveshape > 0.0:
-            intensity = waveshape * 2.0
-            processed = np.tanh(processed * intensity) / intensity
+            driven = processed * (1.0 + waveshape * 3.0)
+            processed = np.tanh(driven).astype(np.float32) * 0.8
         
         # Add noise
         if noise > 0.0:
@@ -222,9 +221,7 @@ class BitCrusher:
         return result
     
     def get_presets(self) -> dict:
-        """
-        Get built-in presets for different styles
-        """
+        """Get built-in processing presets."""
         return {
             "subtle": {
                 "bit_depth": 12,
@@ -278,12 +275,7 @@ class BitCrusher:
         }
     
     def analyze_audio(self, audio: np.ndarray) -> dict:
-        """
-        Analyze audio for visualization
-        
-        Returns:
-            Dictionary with analysis data
-        """
+        """Analyze audio and return metrics."""
         return {
             "rms": np.sqrt(np.mean(audio**2)),
             "peak": np.max(np.abs(audio)),

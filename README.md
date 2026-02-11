@@ -1,182 +1,98 @@
-# 🔥👻 GHOSTKITTY BITCRUSHER 👻🔥
+# GhostKitty Bitcrusher
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20macOS%20%7C%20Linux-lightgrey)](https://github.com)
 
-**The Ultimate Cyberpunk Audio Destruction Tool** 🎵⚡
+**Audio bitcrusher with real-time preview.**
 
-Created by **CATHOUSEMP3** - Transform your audio into glitchy, crushed, cyberpunk masterpieces!
+Created by **CATHOUSEMP3**.
 
-![GhostKitty Bitcrusher](https://img.shields.io/badge/Status-Ready%20for%20Destruction-brightgreen)
+## Features
 
-## 🚀 Features
+### Processing Controls
+- **Bit Depth Reduction** — 16-bit down to 1-bit quantization
+- **Downsampling** — Sample rate reduction with aliasing artifacts
+- **Waveshaping** — Tanh-based harmonic saturation
+- **Noise Injection** — Gaussian white noise
+- **Wet/Dry Mix** — Blend processed and original signals
 
-### ⚡ **MAXIMUM DESTRUCTION CONTROLS**
-- **Bit Depth Crushing**: Reduce from 16-bit to 1-bit for that classic lo-fi crunch
-- **Downsample Destruction**: Crush sample rates for aliasing madness  
-- **Waveshaping**: Add harmonic distortion and saturation
-- **Noise Injection**: Sprinkle digital chaos into your audio
-- **Wet/Dry Mix**: Blend processed and original signals
+### Presets
+- **Subtle** — Light processing
+- **Retro** — Classic 8-bit character
+- **Harsh** — Aggressive digital distortion
+- **Destroy** — Maximum bit reduction
+- **Lo-Fi** — Warm low-fidelity tone
+- **Gameboy** — 4-bit console style
+- **Telephone** — Band-limited degradation
 
-### 🎛️ **DESTRUCTION PRESETS**
-- **Classic**: Vintage 8-bit video game vibes
-- **Harsh**: Aggressive digital destruction
-- **Glitch**: Chaotic bit-mangled mayhem
-- **Vintage**: Warm analog-style crushing
+### Audio I/O
+- Supports WAV, MP3, FLAC, OGG, AIFF
+- Real-time parameter updates during playback
+- Export processed audio to WAV, FLAC, OGG, AIFF
 
-### 🎵 **PROFESSIONAL FEATURES**
-- **Real-time Parameter Updates**: Hear changes instantly
-- **Multiple Format Support**: WAV, MP3, FLAC, OGG, AIFF
-- **Ultra-Fast Processing**: Optimized for zero-lag performance
-- **Cyberpunk GUI**: Matrix-inspired dark interface
-- **Live Audio Monitoring**: Real-time level meters
-
-## 📸 Screenshots
-
-![GhostKitty Bitcrusher GUI](screenshots/ghostkitty-gui.png)
-
-The interface features a sleek cyberpunk design with:
-- 🖤 **Pure black background** for that hacker aesthetic
-- 🟢 **Neon green accents** for Matrix-style visuals
-- ⚡ **Electric blue highlights** for cyber enhancement
-- 🎮 **Rounded buttons** with smooth hover effects
-- 📊 **Real-time audio visualization**
-
-## 🛠️ Installation
+## Installation
 
 ### Requirements
-- Python 3.8 or higher
+- Python 3.8+
 - Windows, macOS, or Linux
 
-### Quick Install
+### Setup
 ```bash
-# Clone the repository
 git clone https://github.com/CATHOUSEMP3/ghostkitty-bitcrusher.git
 cd ghostkitty-bitcrusher
-
-# Install dependencies
 pip install -r requirements.txt
-
-# Launch the application
 python main.py
 ```
 
 ### Dependencies
-- `customtkinter` - Modern GUI framework
-- `pygame` - Real-time audio playback
-- `numpy` - Fast audio processing
-- `soundfile` - Audio file I/O
-- `scipy` - Signal processing utilities
+- `numpy` — Numerical processing
+- `scipy` — Signal processing
+- `soundfile` — Audio file I/O
+- `pygame` — Audio playback
+- `customtkinter` — GUI framework
+- `Pillow` — Image support for GUI
 
-## 🎮 Usage
+## Usage
 
-### Basic Workflow
-1. **Load Audio**: Click "🔥 LOAD AUDIO FILE 🔥" to select your audio
-2. **Destroy**: Use the destruction controls to crush your audio:
-   - **Bit Depth**: Lower values = more crunch
-   - **Downsample**: Higher values = more aliasing
-   - **Mix**: 100% = full effect, 0% = original audio
-3. **Save**: Hit the massive "💾 SAVE TO FILE 💾" button
+1. **Load** an audio file (Ctrl+O or click Load File)
+2. **Adjust** the processing controls — changes apply immediately
+3. **Play** to preview (Space bar or click Play)
+4. **Save** the processed result (Ctrl+S or click Save to File)
 
-### Pro Tips
-- **Real-time Preview**: Audio updates instantly as you move sliders
-- **Preset Power**: Try the destruction presets for instant results
-- **Layer Effects**: Combine multiple parameters for complex textures
-- **Live Monitoring**: Watch the power level meter for audio activity
+### Keyboard Shortcuts
+| Key | Action |
+|-----|--------|
+| `Space` | Play / Pause |
+| `Ctrl+O` | Open file |
+| `Ctrl+S` | Save file |
 
-## 🔧 Technical Details
+## Technical Details
 
 ### Audio Engine
-- **Sample Rate**: 44.1kHz standard
-- **Bit Depth**: Variable (1-16 bit)
-- **Latency**: Ultra-low for real-time performance
-- **Processing**: Chunk-based for smooth parameter updates
+- Sample rate: 44.1 kHz (matches source file)
+- Bit depth: Variable (1–16 bit)
+- Processing: Full-file with pygame playback
 
 ### Algorithms
-- **Bit Crushing**: Quantization-based bit depth reduction
-- **Downsampling**: Anti-aliased sample rate conversion
-- **Waveshaping**: Tanh-based harmonic saturation  
-- **Noise**: Gaussian white noise injection
+- **Bit Crushing** — Quantization-based bit depth reduction
+- **Downsampling** — `scipy.signal.resample` with proper axis handling for stereo
+- **Waveshaping** — `tanh` soft-clipping with adjustable drive
+- **Noise** — Gaussian white noise injection
 
-## 🎨 Customization
+## Contributing
 
-The GUI uses a modular color system that can be easily customized:
+1. Fork the repository
+2. Create a feature branch
+3. Commit changes
+4. Open a Pull Request
 
-```python
-self.colors = {
-    "bg_dark": "#000000",           # Pure black background
-    "accent_neon_green": "#00ff00", # Matrix green
-    "accent_cyber_blue": "#00ccff", # Electric blue
-    "accent_hot_pink": "#ff0080",   # Hot pink highlights
-    # ... more colors
-}
-```
+## License
 
-## 🤝 Contributing
+MIT License — see [LICENSE](LICENSE) for details.
 
-We welcome contributions! Here's how to help:
+## Credits
 
-1. **Fork** the repository
-2. **Create** a feature branch (`git checkout -b epic-feature`)
-3. **Commit** your changes (`git commit -am 'Add epic feature'`)
-4. **Push** to the branch (`git push origin epic-feature`)
-5. **Open** a Pull Request
+Created by **CATHOUSEMP3**.
 
-### Development Setup
-```bash
-# Clone your fork
-git clone https://github.com/YOUR_USERNAME/ghostkitty-bitcrusher.git
-cd ghostkitty-bitcrusher
-
-# Install development dependencies
-pip install -r requirements.txt
-pip install -r requirements-dev.txt
-
-# Run tests
-python -m pytest tests/
-```
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Credits
-
-### Created by CATHOUSEMP3
-- **Audio Engine**: Custom Python implementation
-- **GUI Design**: Cyberpunk-inspired interface
-- **Algorithms**: Original bitcrushing implementations
-
-### Dependencies
-- [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter) - Modern GUI framework
-- [Pygame](https://www.pygame.org/) - Audio playback engine
-- [NumPy](https://numpy.org/) - Numerical computing
-- [SoundFile](https://github.com/bastibe/python-soundfile) - Audio I/O
-
-## 🐛 Bug Reports
-
-Found a bug? Please open an issue with:
-- **Operating System**: Windows/macOS/Linux version
-- **Python Version**: `python --version`
-- **Error Message**: Full traceback if available
-- **Steps to Reproduce**: What you were doing when it broke
-
-## 🔮 Roadmap
-
-### Upcoming Features
-- 🎧 **VST Plugin Version**: Use in your DAW
-- 🎛️ **MIDI Control**: Hardware controller support
-- 📊 **Spectrum Analyzer**: Real-time frequency visualization
-- 🎵 **More Presets**: Expanded destruction library
-- 🔄 **Batch Processing**: Process multiple files at once
-
----
-
-**⚡ READY FOR MAXIMUM AUDIO DESTRUCTION? ⚡**
-
-*GhostKitty Bitcrusher - Where audio goes to get crushed* 👻🔥
-
----
-
-### 🌟 Star this repo if you love crushing audio! 🌟
+Dependencies: [CustomTkinter](https://github.com/TomSchimansky/CustomTkinter), [Pygame](https://www.pygame.org/), [NumPy](https://numpy.org/), [SoundFile](https://github.com/bastibe/python-soundfile), [SciPy](https://scipy.org/).
